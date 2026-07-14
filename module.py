@@ -18,6 +18,7 @@ class TpLinkCameraModule(CameraModule):
     capabilities = frozenset(
         {
             CameraCapability.LIVE,
+            CameraCapability.RECORDING,
             CameraCapability.DETECTIONS,
             CameraCapability.CONTROL,
         }

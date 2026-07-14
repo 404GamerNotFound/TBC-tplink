@@ -2,9 +2,9 @@
   "schema_version": 1,
   "key": "tplink",
   "label": "TP-Link / Tapo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "TP-Link-Tapo-Kameras via ONVIF und RTSP",
   "entrypoint": "plugin.py",
-  "capabilities": ["live", "detections", "control"],
+  "capabilities": ["live", "recording", "detections", "control"],
   "ports": {"onvif": 2020, "http": 80, "rtsp": 554}
 }

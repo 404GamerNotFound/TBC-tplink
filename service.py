@@ -6,9 +6,11 @@ from urllib.parse import quote
 
 from tbc_camera_api import CameraSnapshot
 from tbc_camera_api import onvif as _onvif
+from tbc_camera_api import streams as _streams
 from .catalog import catalog_rows
 
 probe_onvif = _onvif.probe_onvif
+rtsp_uri_with_credentials = _streams.rtsp_uri_with_credentials
 
 
 async def probe_camera(camera: dict[str, Any]) -> CameraSnapshot:
@@ -19,7 +21,11 @@ async def probe_camera(camera: dict[str, Any]) -> CameraSnapshot:
         username=camera["username"],
         password=camera["password"],
     )
-    stream_uri = tapo_rtsp_uri(camera, stream="stream1")
+    stream_uri = (
+        rtsp_uri_with_credentials(onvif_probe.stream_uris[0], camera["username"], camera["password"])
+        if onvif_probe.stream_uris
+        else tapo_rtsp_uri(camera, stream="stream1")
+    )
     messages = [onvif_probe.message]
     if not onvif_probe.success:
         messages.append("RTSP-Stream wurde nach dem TP-Link/Tapo-Standard konfiguriert")
